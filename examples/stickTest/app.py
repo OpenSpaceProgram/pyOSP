@@ -7,7 +7,7 @@ from evdev import InputDevice, list_devices, ecodes, categorize
 
 #Create SenseHat object instance
 sense = SenseHat()
-#Create holding variable for the joystick input object instane 
+#Create holding variable for the joystick input object instane
 joystick = None
 #Variable to break running loop.
 running = True
@@ -22,12 +22,11 @@ for dev in devices:
     print(dev.phys)
     if dev.phys == "rpi-sense-joy/input0":
         joystick = dev
-        
 
 #Display temp reading in red
 def display_temp():
     sense.show_message("{:.1f}".format(sense.temp) + "C", text_colour=[255, 0, 0], scroll_speed=scrollSpeed)
-    
+
 #Display temp reading from alt sensor in yellow
 def display_temp_from_humidity():
     temp = sense.get_temperature_from_pressure()
@@ -51,19 +50,19 @@ while running:
             #On press down exit program
             if event.code == 28 and event.value == 0:
                 running = False
-                        
-            #On up 
+
+            #On up
             if event.code == 103 and event.value == 0:
                 display_temp()
-                        
+
             #On right
             if event.code == 106 and event.value == 0:
                 display_humidity()
-                
+
             #On left
             if event.code == 105 and event.value == 0:
                 display_pressure()
-            
+
             #On down
             if event.code == 108 and event.value == 0:
                 display_temp_from_humidity()
