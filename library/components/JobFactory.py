@@ -7,22 +7,22 @@ import sys
 sys.path.append('../../')
 
 
-class TriggerFactory(object):
+class JobFactory(object):
 
-    triggerList = defaultdict(list)
-    triggerPath = 'library/triggers/'
-    triggerNameSpace = 'library.triggers.'
+    jobList = defaultdict(list)
+    jobPath = 'library/jobs/'
+    jobNameSpace = 'library.jobs.'
 
     def __init__(self):
-        super(TriggerFactory, self).__init__()
+        super(JobFactory, self).__init__()
         self.getSensorList()
 
-    def getTriggerList(self):
-        if (len(self.triggerList) == 0):
-            for fileName in glob.glob(self.triggerPath + "*.py"):
-                if (fileName != self.triggerPath + '__init__.py'):
-                    shortName = fileName.replace(self.triggerPath, '').replace('.py', '')
-                    module = __import__(self.triggerNameSpace + shortName, globals(), locals(), [shortName])
+    def getjobList(self):
+        if (len(self.jobList) == 0):
+            for fileName in glob.glob(self.jobPath + "*.py"):
+                if (fileName != self.jobPath + '__init__.py'):
+                    shortName = fileName.replace(self.jobPath, '').replace('.py', '')
+                    module = __import__(self.jobNameSpace + shortName, globals(), locals(), [shortName])
                     self.sensorList[shortName] = {
                         'fileName': fileName,
                         'module': module
@@ -31,7 +31,7 @@ class TriggerFactory(object):
 
         return self.sensorList
 
-    def getTrigger(self, name):
+    def getJob(self, name):
         if name in self.sensorList.keys():
             #print(name)
             #print(self.sensorList[name])

@@ -4,7 +4,7 @@ from library.components.SensorFactory import SensorFactory as SensorFactory
 
 fact = SensorFactory()
 
-#print(fact.getSensorList())
+print(fact.getSensorList())
 
 newtemp = fact.getSensor('Temperature')
 
