@@ -10,8 +10,8 @@ sys.path.append('../../')
 class SensorFactory(object):
 
     sensorList = defaultdict(list)
-    sensorPath = 'library/triggers/'
-    sensorNameSpace = 'library.triggers.'
+    sensorPath = 'library/sensors/'
+    sensorNameSpace = 'library.sensors.'
 
     def __init__(self):
         super(SensorFactory, self).__init__()
@@ -27,7 +27,7 @@ class SensorFactory(object):
                         'fileName': fileName,
                         'module': module
                     }
-                    print(self.sensorList[shortName])
+                    print(shortName)
 
         return self.sensorList
 
@@ -38,3 +38,7 @@ class SensorFactory(object):
             class_ = getattr(self.sensorList[name]['module'], name)
             instance = class_()
             return instance
+        else:
+            print("Sensor not found: " + name)
+
+        return False

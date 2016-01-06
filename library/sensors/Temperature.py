@@ -13,13 +13,13 @@ class Temperature(Sensor):
 
     def __init__(self):
         super(Temperature, self).__init__()
-        tempMetaData = MetaData('Temperature')
+        tempMetaData = MetaData('Centigrade')
         tempMetaData.setValueCallback(self.getTempValue)
         tempMetaData.setUnitCallback(self.getTempUnit)
         self.addMetaData(tempMetaData)
 
     def getTempValue(self):
-        return randint(-7, 40)
+        return str(randint(-7, 40))
 
     def getTempUnit(self):
         return " Centigrade"

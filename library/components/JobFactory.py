@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collections import defaultdict
+from library.components.JobModule import JobModule as Job
 import glob
 import sys
 #add the project folder to pythpath
@@ -15,26 +16,30 @@ class JobFactory(object):
 
     def __init__(self):
         super(JobFactory, self).__init__()
-        self.getSensorList()
+        self.getJobList()
 
-    def getjobList(self):
+    def getJobList(self):
         if (len(self.jobList) == 0):
             for fileName in glob.glob(self.jobPath + "*.py"):
                 if (fileName != self.jobPath + '__init__.py'):
                     shortName = fileName.replace(self.jobPath, '').replace('.py', '')
                     module = __import__(self.jobNameSpace + shortName, globals(), locals(), [shortName])
-                    self.sensorList[shortName] = {
+                    self.jobList[shortName] = {
                         'fileName': fileName,
                         'module': module
                     }
-                    print(self.sensorList[shortName])
+                    print(shortName)
 
-        return self.sensorList
+        return self.jobList
 
-    def getJob(self, name):
-        if name in self.sensorList.keys():
+    def getJob(self, name, specification):
+        if name in self.jobList.keys():
             #print(name)
-            #print(self.sensorList[name])
-            class_ = getattr(self.sensorList[name]['module'], name)
-            instance = class_()
+            #print(self.jobList[name])
+            class_ = getattr(self.jobList[name]['module'], name)
+            instance = class_(specification)
             return instance
+        else:
+            print("Job not found! " + name)
+            job = Job(specification)
+            return job

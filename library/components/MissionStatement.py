@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collections import defaultdict
 import json
+import yaml
 
 
 class MissionStatement(object):
@@ -8,21 +9,31 @@ class MissionStatement(object):
     missionList = defaultdict(list)
     missionStatementReference = object
 
-    def __init__(self, sensorFactory, sensorList, missionStatementReference):
+    def __init__(self, missionStatementReference):
         super(MissionStatement, self).__init__()
-        self.sensorFactory = sensorFactory
         self.missionStatementReference = missionStatementReference
+        self.loadMissions()
 
-    def readMissionStatementFile(self):
-        self.missionList = json.load(self.missionStatementReference.value)
+    def readMissionStatementFile(self, jsonFlag):
+        if (jsonFlag):
+            self.missionList = json.load(self.missionStatementReference['value'])
+        else:
+            missionFile = open(self.missionStatementReference['value'])
+            self.missionList = yaml.load(missionFile.read())
+
+    def getMissionList(self):
+        return self.missionList
 
     def loadMissions(self):
-        if self.missionStatementReference.Type == 'file':
+        if self.missionStatementReference['type'] == 'file':
             #readfile
-            self.readMissionStatementFile();
-        elif self.missionStatementReference.Type == 'web':
+            self.readMissionStatementFile(False)
+        elif self.missionStatementReference['type'] == 'filejson':
+            #readfile
+            self.readMissionStatementFile(True)
+        elif self.missionStatementReference['type'] == 'web':
             print('foo')
             #getwebfile and cache it
-        elif self.missionStatementReference.Type == 'stream':
+        elif self.missionStatementReference['type'] == 'stream':
             #stream to var and cache it
             print('foo')

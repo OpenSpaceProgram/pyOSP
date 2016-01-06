@@ -1,15 +1,29 @@
 # -*- coding: utf-8 -*-
 
-from library.components.SensorFactory import SensorFactory as SensorFactory
+from library.components.MissionStatement import MissionStatement
+from library.components.Mission import Mission
+import os
+import yaml
 
-fact = SensorFactory()
+msrYamlDoc = """
+value:  """+os.path.join(os.path.dirname(__file__), 'missionStatement')+"""
+type: file
+"""
 
-print(fact.getSensorList())
+missionStatementReference = yaml.load(msrYamlDoc)
 
-newtemp = fact.getSensor('Temperature')
+print (missionStatementReference['value'])
 
-meta = newtemp.getMetaData()
+missionStatement = MissionStatement(missionStatementReference)
 
-for key in meta.keys():
-    print(key)
-    print(meta[key].getValue(), meta[key].getUnit())
+#try:
+#while True:
+missionlist = missionStatement.getMissionList()
+
+for missionInstance in missionlist:
+    for missionName in missionInstance:
+        #possible new thread here?
+        theMission = Mission(missionName, missionInstance[missionName])
+        theMission.run()
+#except KeyboardInterrupt:
+#    print ('interrupted!')
