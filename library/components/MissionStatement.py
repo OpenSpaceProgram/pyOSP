@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
+
+
+import sys
 from collections import defaultdict
 import json
 import yaml
+sys.path.append('../../')
+from library.components.Application import Application as Application
 
 
-class MissionStatement(object):
+class MissionStatement(Application):
 
     missionList = defaultdict(list)
     missionStatementReference = object

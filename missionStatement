@@ -1,6 +1,6 @@
 - mission one:
     job:
-        LogMetaData:
+        FileLogMetaData:
             Temperature:
                 Centigrade
     delay: 30

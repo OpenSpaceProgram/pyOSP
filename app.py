@@ -24,6 +24,7 @@ for missionInstance in missionlist:
     for missionName in missionInstance:
         #possible new thread here?
         theMission = Mission(missionName, missionInstance[missionName])
+        missionStatement.setFlag('missionStatement', missionName)
         theMission.run()
 #except KeyboardInterrupt:
 #    print ('interrupted!')

@@ -3,14 +3,17 @@ from library.components.JobFactory import JobFactory as JobFactory
 from library.components.SensorFactory import SensorFactory as SensorFactory
 from library.components.Condition import Condition as Condition
 import time
+import sys
 from collections import defaultdict
+sys.path.append('../../')
+from library.components.Application import Application as Application
 
 
-class Mission(object):
+class Mission(Application):
 
     missionReference = defaultdict(list)
     missionName = ''
-    lastRun = time.time
+    lastRun = 0
 
     def __init__(self, missionName, missionReference):
         super(Mission, self).__init__()
@@ -19,6 +22,7 @@ class Mission(object):
 
     def run(self):
         print("Doing mission: " + self.missionName)
+        print("\\GetFLAG::" + self.getFlag('missionStatement'))
 
         doJob = True
 
@@ -42,10 +46,10 @@ class Mission(object):
 #            value1 = 2
 #            condition = Condition(mCondition)
         if ('delay' in self.missionReference):
-            timedelay = str(time.time() + int(self.missionReference['delay']))
+            timedelay = str(self.lastRun + int(self.missionReference['delay']))
             #create and test time condition
             condition = Condition('gthan')
-            if (condition.test(str(time.time(),timedelay)) == False):
+            if (condition.test(str(time.time()),timedelay) is False):
                 doJob = False
 
         jobFact = JobFactory()
