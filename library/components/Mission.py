@@ -35,7 +35,9 @@ class Mission(Application):
                     metaDataName = sensorOptions[2].strip()
                     print(sensorName)
                     sensor = senseFact.getSensor(sensorName)
-                    if (sensor != False):
+                    if (sensor is False):
+                        doJob = False
+                    else:
                         metaData = sensor.getMetaData()
                         condition = Condition(conditionName)
                         if (condition.test(metaData[metaDataName].getValue() , mCondition[conditionName][1]) == False):
@@ -49,11 +51,12 @@ class Mission(Application):
             timedelay = str(self.lastRun + int(self.missionReference['delay']))
             #create and test time condition
             condition = Condition('gthan')
-            if (condition.test(str(time.time()),timedelay) is False):
+            if (condition.test(int(time.time()),timedelay) is False):
                 doJob = False
 
         jobFact = JobFactory()
-        if ('job' in self.missionReference and doJob):
+        if ('job' in self.missionReference and doJob is not False):
+            self.lastRun = int(time.time())
             for jobName in self.missionReference['job']:
                 print(":Doing JOB " + jobName)
                 job = jobFact.getJob(jobName, self.missionReference['job'][jobName])

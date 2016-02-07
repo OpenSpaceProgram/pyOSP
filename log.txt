@@ -1,0 +1,5 @@
+{"1454875980": {"unit": " Centigrade", "value": "20"}}
+{"1454875980": {"value": "12", "unit": " Centigrade"}}
+{"1454875981": {"unit": " Centigrade", "value": "-6"}}
+{"1454875981": {"value": "15", "unit": " Centigrade"}}
+{"1454875981": {"value": "27", "unit": " Centigrade"}}

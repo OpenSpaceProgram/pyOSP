@@ -1,28 +1,20 @@
-- mission one:
+- Log Temperature:
     job:
         FileLogMetaData:
-            Temperature:
+            SenseTemp:
                 Centigrade
     delay: 30
 
-- mission two:
+- Log hTemperature:
     job:
-        ToggleLight:
-            on
-    conditions:
-        - gt:
-            - Temperature, Centigrade
-            - 21
-        - neq:
-            - Network, statuslt
-            - 'down'
+        FileLogMetaData:
+            SenseHumidTemp:
+                Centigrade
+    delay: 30
 
-- mission three:
+- Log pTemperature:
     job:
-        ToggleLight:
-            off
-    conditions:
-        - lt:
-            - Temperature, Centigrade
-            - Altitude, Meters
+        FileLogMetaData:
+            SensePressTemp:
+                Centigrade
     delay: 30

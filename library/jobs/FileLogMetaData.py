@@ -20,15 +20,25 @@ class FileLogMetaData(Job):
         senseFact = SensorFactory()
         for sensorName in self.specification:
             sensor = senseFact.getSensor(sensorName)
-            metaData = sensor.getMetaData()
 
-            #print(sensorName + "::" + metaData[self.specification[sensorName]].getName() + " reading: ")
-            #print(metaData[self.specification[sensorName]].getValue() + " "+ metaData[self.specification[sensorName]].getUnit())
-            data = defaultdict(list)
-            log = defaultdict(list)
-            timestamp = str(time.time())
-            data['unit'] = metaData[self.specification[sensorName]].getUnit()
-            data['value'] = metaData[self.specification[sensorName]].getValue()
-            log[timestamp] = data
-            print(json.dumps(log))
-            #append to file the log data
+            if (sensor is not False):
+                metaData = sensor.getMetaData()
+
+                #print(sensorName + "::" + metaData[self.specification[sensorName]].getName() + " reading: ")
+                #print(metaData[self.specification[sensorName]].getValue() + " "+ metaData[self.specification[sensorName]].getUnit())
+                data = defaultdict(list)
+                log = defaultdict(list)
+                timestamp = int(time.time())
+                data['unit'] = metaData[self.specification[sensorName]].getUnit()
+                data['value'] = metaData[self.specification[sensorName]].getValue()
+                log[timestamp] = data
+                print(json.dumps(log))
+
+
+                # Open a file
+                fo = open("log.txt", "a")
+                fo.write(json.dumps(log)+"\n");
+
+                # Close opend file
+                fo.close()
+                #append to file the log data
