@@ -18,3 +18,10 @@
             SensePressTemp:
                 Centigrade
     delay: 30
+
+- Log Humidity:
+    job:
+        FileLogMetaData:
+            SenseHumity:
+                Humidity
+    delay: 30
