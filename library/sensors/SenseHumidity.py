@@ -20,8 +20,7 @@ class SenseHumidity(Sensor):
 
     def getHumidityValue(self):
         sense = SenseHat()
-        temp = sense.humidity
-        return str(temp)
+        return str(sense.humidity)
 
     def getHumidtyUnit(self):
         return " %"

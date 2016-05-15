@@ -20,8 +20,7 @@ class SensePressure(Sensor):
 
     def getPressureValue(self):
         sense = SenseHat()
-        temp = sense.get_temperature_from_pressure()
-        return str(temp)
+        return str(sense.pressure)
 
     def getPressureUnit(self):
         return " Millibars"
