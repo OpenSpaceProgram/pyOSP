@@ -25,3 +25,12 @@
             SenseHumidity:
                 Humidity
     delay: 30
+
+- Log Pressure:
+    job:
+        FileLogMetaData:
+            SensePressure:
+                Millibars
+    delay: 30
+
+    #
