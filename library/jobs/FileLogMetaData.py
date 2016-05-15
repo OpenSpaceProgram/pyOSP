@@ -34,11 +34,11 @@ class FileLogMetaData(Job):
                 log[timestamp] = data
                 print(json.dumps(log))
 
-
                 # Open a file
                 fo = open("log.txt", "a")
-                fo.write(json.dumps(log)+"\n");
+
+                #append to file the log data
+                fo.write(json.dumps(log) + "\n")
 
                 # Close opend file
                 fo.close()
-                #append to file the log data

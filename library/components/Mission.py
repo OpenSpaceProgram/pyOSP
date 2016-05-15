@@ -30,36 +30,43 @@ class Mission(Application):
             senseFact = SensorFactory()
             for mCondition in self.missionReference['conditions']:
                 for conditionName in mCondition:
+                    conditionValue = mCondition[conditionName][1]
+
                     sensorOptions = mCondition[conditionName][0].partition(',')
                     sensorName = sensorOptions[0].strip()
                     metaDataName = sensorOptions[2].strip()
-                    print(sensorName)
+
+                    #create the sensor
                     sensor = senseFact.getSensor(sensorName)
                     if (sensor is False):
+                        #sensor module did not load
                         doJob = False
                     else:
+                        #get the sensors meta data
                         metaData = sensor.getMetaData()
+                        #create a condition to test (equals, less than, greater than etc)
                         condition = Condition(conditionName)
-                        if (condition.test(metaData[metaDataName].getValue() , mCondition[conditionName][1]) == False):
+                        #if the condition fails do not do job
+                        if (condition.test(metaData[metaDataName].getValue(), conditionValue) is False):
                             doJob = False
 
-#            if (isinstance(s, str)):
-#            value1 = 1
-#            value1 = 2
-#            condition = Condition(mCondition)
         if ('delay' in self.missionReference):
             timedelay = str(self.lastRun + int(self.missionReference['delay']))
             #create and test time condition
             condition = Condition('gthan')
-            if (condition.test(int(time.time()),timedelay) is False):
+            if (condition.test(int(time.time()), timedelay) is False):
                 doJob = False
 
         jobFact = JobFactory()
         if ('job' in self.missionReference and doJob is not False):
+            #set the last run time
             self.lastRun = int(time.time())
             for jobName in self.missionReference['job']:
                 print(":Doing JOB " + jobName)
-                job = jobFact.getJob(jobName, self.missionReference['job'][jobName])
+
+                #grab the job specification to pass to the factory
+                jobSpec = self.missionReference['job'][jobName]
+                job = jobFact.getJob(jobName, jobSpec)
                 job.run()
         else:
             print('No jobs')
