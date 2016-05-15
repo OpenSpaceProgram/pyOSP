@@ -19,9 +19,11 @@ class MissionStatement(Application):
         self.missionStatementReference = missionStatementReference
         self.loadMissions()
 
-    def readMissionStatementFile(self, jsonFlag):
-        if (jsonFlag):
+    def readMissionStatementFile(self, statementType):
+        #Read in json encoded statement
+        if (statementType == 'json'):
             self.missionList = json.load(self.missionStatementReference['value'])
+        #Read in yaml as default
         else:
             missionFile = open(self.missionStatementReference['value'])
             self.missionList = yaml.load(missionFile.read())
@@ -32,10 +34,10 @@ class MissionStatement(Application):
     def loadMissions(self):
         if self.missionStatementReference['type'] == 'file':
             #readfile
-            self.readMissionStatementFile(False)
+            self.readMissionStatementFile()
         elif self.missionStatementReference['type'] == 'filejson':
             #readfile
-            self.readMissionStatementFile(True)
+            self.readMissionStatementFile('json')
         elif self.missionStatementReference['type'] == 'web':
             print('foo')
             #getwebfile and cache it
