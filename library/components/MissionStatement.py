@@ -15,7 +15,7 @@ class MissionStatement(Application):
     missionStatementReference = object
 
     def __init__(self, missionStatementReference):
-        super(MissionStatement, self).__init__()
+        Application.__init__(self)
         self.missionStatementReference = missionStatementReference
         self.loadMissions()
 
@@ -34,7 +34,7 @@ class MissionStatement(Application):
     def loadMissions(self):
         if self.missionStatementReference['type'] == 'file':
             #readfile
-            self.readMissionStatementFile()
+            self.readMissionStatementFile('')
         elif self.missionStatementReference['type'] == 'filejson':
             #readfile
             self.readMissionStatementFile('json')

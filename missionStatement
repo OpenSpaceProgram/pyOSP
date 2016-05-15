@@ -22,6 +22,6 @@
 - Log Humidity:
     job:
         FileLogMetaData:
-            SenseHumity:
+            SenseHumidity:
                 Humidity
     delay: 30

@@ -3,12 +3,12 @@
 
 from collections import defaultdict
 
-class Application():
+class Application(object):
 
     flags = defaultdict(list)
 
     def __init__(self):
-        super(Application, self).__init__()
+        object.__init__(self)
 
     def setFlag(self, flagName, flagValue):
         self.flags[flagName] = flagValue
