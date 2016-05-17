@@ -13,7 +13,7 @@ class SensePressure(Sensor):
 
     def __init__(self):
         super(SensePressure, self).__init__()
-        tempMetaData = MetaData('millibars')
+        tempMetaData = MetaData('Millibars')
         tempMetaData.setValueCallback(self.getPressureValue)
         tempMetaData.setUnitCallback(self.getPressureUnit)
         self.addMetaData(tempMetaData)
