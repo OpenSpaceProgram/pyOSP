@@ -31,6 +31,7 @@ class FileLogMetaData(Job):
                 timestamp = int(time.time())
                 data['unit'] = metaData[self.specification[sensorName]].getUnit()
                 data['value'] = metaData[self.specification[sensorName]].getValue()
+                data['sensor'] = sensorName
                 log[timestamp] = data
                 print(json.dumps(log))
 
