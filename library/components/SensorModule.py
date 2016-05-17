@@ -5,7 +5,6 @@ from collections import defaultdict
 class SensorModule(object):
 
     metaDataList = defaultdict(list)
-    #binaryDataList = list
     exclusiveFlag = False
     valueRange = defaultdict(list)
 

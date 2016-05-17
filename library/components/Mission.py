@@ -21,8 +21,6 @@ class Mission(Application):
         self.missionName = missionName
 
     def run(self):
-        print("Doing mission: " + self.missionName)
-        print("\\GetFLAG::" + self.getFlag('missionStatement'))
 
         doJob = True
 
@@ -62,11 +60,12 @@ class Mission(Application):
             #set the last run time
             self.lastRun = int(time.time())
             for jobName in self.missionReference['job']:
-                print(":Doing JOB " + jobName)
-
+                print("." + jobName)
                 #grab the job specification to pass to the factory
                 jobSpec = self.missionReference['job'][jobName]
                 job = jobFact.getJob(jobName, jobSpec)
                 job.run()
+        elif(doJob is False):
+            print('-')
         else:
-            print('No jobs')
+            print('Error: Job not found')

@@ -24,8 +24,6 @@ class FileLogMetaData(Job):
             if (sensor is not False):
                 metaData = sensor.getMetaData()
 
-                #print(sensorName + "::" + metaData[self.specification[sensorName]].getName() + " reading: ")
-                #print(metaData[self.specification[sensorName]].getValue() + " "+ metaData[self.specification[sensorName]].getUnit())
                 data = defaultdict(list)
                 log = defaultdict(list)
                 timestamp = int(time.time())
@@ -33,7 +31,6 @@ class FileLogMetaData(Job):
                 data['value'] = metaData[self.specification[sensorName]].getValue()
                 data['sensor'] = sensorName
                 log[timestamp] = data
-                print(json.dumps(log))
 
                 # Open a file
                 fo = open("log.txt", "a")

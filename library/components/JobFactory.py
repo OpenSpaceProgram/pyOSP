@@ -28,18 +28,15 @@ class JobFactory(object):
                         'fileName': fileName,
                         'module': module
                     }
-                    print(shortName)
 
         return self.jobList
 
     def getJob(self, name, specification):
         if name in self.jobList.keys():
-            #print(name)
-            #print(self.jobList[name])
             class_ = getattr(self.jobList[name]['module'], name)
             instance = class_(specification)
             return instance
         else:
-            print("Job not found! " + name)
+            print("Error: Job not found! " + name)
             job = Job(specification)
             return job

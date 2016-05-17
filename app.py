@@ -34,4 +34,4 @@ try:
                     missionsRunning[missionName].run()
 
 except KeyboardInterrupt:
-    print ('interrupted!')
+    print ('Exitting..')

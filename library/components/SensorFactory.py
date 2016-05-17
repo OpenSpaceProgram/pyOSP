@@ -27,18 +27,15 @@ class SensorFactory(object):
                         'fileName': fileName,
                         'module': module
                     }
-                    print(shortName)
 
         return self.sensorList
 
     def getSensor(self, name):
         if name in self.sensorList.keys():
-            #print(name)
-            #print(self.sensorList[name])
             class_ = getattr(self.sensorList[name]['module'], name)
             instance = class_()
             return instance
         else:
-            print("Sensor not found: " + name)
+            print("Error: Sensor not found: " + name)
 
         return False
