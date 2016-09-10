@@ -33,4 +33,9 @@
                 Millibars
     delay: 30
 
-    #
+- Take ISO200 Photo:
+    job:
+        FileLogMetaData:
+            Raspistill:
+                ISO200
+    delay: 60
