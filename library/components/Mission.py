@@ -66,6 +66,7 @@ class Mission(Application):
                 job = jobFact.getJob(jobName, jobSpec)
                 job.run()
         elif(doJob is False):
-            print('-')
+#            print('-')
+            doJob = False
         else:
             print('Error: Job not found')
