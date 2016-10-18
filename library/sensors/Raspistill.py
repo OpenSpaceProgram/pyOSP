@@ -10,10 +10,10 @@ from library.components.SensorModule import SensorModule as Sensor
 from library.components.MetaData import MetaData as MetaData
 
 
-class SenseTemp(Sensor):
+class Raspistill(Sensor):
 
     def __init__(self):
-        super(SenseTemp, self).__init__()
+        super(Raspistill, self).__init__()
         # ISO100
         iso200MetaData = MetaData('ISO100')
         iso200MetaData.setValueCallback(self.getIso100)
@@ -62,4 +62,4 @@ class SenseTemp(Sensor):
         return " Photo"
 
     def getMetaData(self):
-        return super(SenseTemp, self).getMetaData()
+        return super(Raspistill, self).getMetaData()
