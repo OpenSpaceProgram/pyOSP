@@ -30,6 +30,7 @@ class FileLogMetaData(Job):
                 data['unit'] = metaData[self.specification[sensorName]].getUnit()
                 data['value'] = metaData[self.specification[sensorName]].getValue()
                 data['sensor'] = sensorName
+                data['metaData'] = self.specification[sensorName]
                 log[timestamp] = data
 
                 # Open a file
