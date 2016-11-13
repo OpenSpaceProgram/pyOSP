@@ -39,3 +39,24 @@
             Raspistill:
                 ISO200
     delay: 60
+
+- Sync Data Lat:
+    job:
+        SyncData:
+            Gps:
+                Latitude
+    delay: 60
+
+- Sync Data Lon:
+    job:
+        SyncData:
+            Gps:
+                Longitude
+    delay: 60
+
+- Sync Data Alt:
+    job:
+        SyncData:
+            Gps:
+                Altitude
+    delay: 60
