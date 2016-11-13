@@ -15,10 +15,10 @@ class Raspistill(Sensor):
     def __init__(self):
         super(Raspistill, self).__init__()
         # ISO100
-        iso200MetaData = MetaData('ISO100')
-        iso200MetaData.setValueCallback(self.getIso100)
-        iso200MetaData.setUnitCallback(self.getUnit)
-        self.addMetaData(iso200MetaData)
+        iso100MetaData = MetaData('ISO100')
+        iso100MetaData.setValueCallback(self.getIso100)
+        iso100MetaData.setUnitCallback(self.getUnit)
+        self.addMetaData(iso100MetaData)
 
         # ISO200
         iso200MetaData = MetaData('ISO200')
@@ -27,16 +27,16 @@ class Raspistill(Sensor):
         self.addMetaData(iso200MetaData)
 
         # ISO400'
-        iso200MetaData = MetaData('ISO400')
-        iso200MetaData.setValueCallback(self.getIso400)
-        iso200MetaData.setUnitCallback(self.getUnit)
-        self.addMetaData(iso200MetaData)
+        iso400MetaData = MetaData('ISO400')
+        iso400MetaData.setValueCallback(self.getIso400)
+        iso400MetaData.setUnitCallback(self.getUnit)
+        self.addMetaData(iso400MetaData)
 
         # ISO800'
-        iso200MetaData = MetaData('ISO800')
-        iso200MetaData.setValueCallback(self.getIso800)
-        iso200MetaData.setUnitCallback(self.getUnit)
-        self.addMetaData(iso200MetaData)
+        iso800MetaData = MetaData('ISO800')
+        iso800MetaData.setValueCallback(self.getIso800)
+        iso800MetaData.setUnitCallback(self.getUnit)
+        self.addMetaData(iso800MetaData)
 
     def getIso100(self):
         filename = "photos/" + str(time.time()) + "-iso100.jpg"
