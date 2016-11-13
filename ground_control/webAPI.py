@@ -7,29 +7,34 @@ alt = 0
 lat = 0
 lon = 0
 last_time = 0
+debug = ''
     
 
 @app.route("/")
 def get_stats():
-    global alt, lat, lon, last_time
-    return render_template('layout.html', alt=alt, lat=lat, lon=lon, last_time=last_time)
+    global alt, lat, lon, last_time, debug
+    return render_template('layout.html', alt=alt, lat=lat, lon=lon, last_time=last_time, debug=debug)
     
     
 @app.route("/post", methods=['GET', 'POST'])
 def returnPost():
-    global alt, lat, lon, last_time
+    global alt, lat, lon, last_time, debug  
+    debug = ''
     
-    if (request.form['alt']):
-        alt = request.form['alt']
+    if ('Altitude' in request.form):
+        alt = request.form['Altitude']
         last_time = int(time.time())
     
-    if (request.form['lat']):
-        lat = request.form['lat']
+    if ('Latitude' in request.form):
+        lat = request.form['Latitude']
         last_time = int(time.time())
     
-    if (request.form['lon']):
-        lon = request.form['lon']
+    if ('Longitude' in request.form):
+        lon = request.form['Longitude']
         last_time = int(time.time())
+        
+    for value in request.form:
+        debug += ': ' + value
     
     return "done."
     
